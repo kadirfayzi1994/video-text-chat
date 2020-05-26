@@ -11,7 +11,6 @@ const fs = require("fs");
 const app = express();
 const http = require("http").Server(app);
 
-
 const port = process.env.PORT || 3000;
 
 require("./src/sockets/chat.js").sockets(http);
@@ -77,7 +76,6 @@ fs.readdirSync("./src/routers").forEach(function (file) {
     route.controller(app);
   }
 });
-
 
 const userModel = mongoose.model("User");
 
