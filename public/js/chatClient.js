@@ -120,8 +120,7 @@ $(function () {
   var conn;
   var peer_id;
 
-  var peer = new Peer({
-    host: 'peerjs-server.herokuapp.com', secure: true, port: 443,
+  var peer = new Peer({    
     config: {
       'iceServers': [
         { url: 'stun:stun.l.google.com:19302' }

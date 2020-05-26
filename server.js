@@ -11,14 +11,12 @@ const fs = require("fs");
 const app = express();
 const http = require("http").Server(app);
 
-const sslRedirect = require('heroku-ssl-redirect');
-app.use(sslRedirect());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 require("./src/sockets/chat.js").sockets(http);
 
-
+const uri = 'mongodb+srv://kadir:qYuk4ihEEkK2iHyD@video-chat-app-gdjlj.mongodb.net/video-chat-app?retryWrites=true&w=majority'
 mongoose.connect(process.env.DATABASE_URI || 'mongodb://127.0.0.1/video-chat-app',
   {
     useNewUrlParser: true,
@@ -98,8 +96,6 @@ app.use(function (req, res, next) {
     next();
   }
 });
-
-
 
 http.listen(port, function () {
   console.log("server started at port :" + port);
