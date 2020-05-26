@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right nav-elements">
+          <li><a>Merhaba, <%= user.username %></a></li>
+          <li><a href="/user/logout">Çıkış Yap</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <hr>
+  <div class="container-fluid">
+    <input type="hidden" id="user" value="<%= user.username %>" />
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4></h4>
+        </div>
+        <div class="panel-body" id="scrl">
+          <ul id="list"></ul>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 id="frndName"></h4>
+        </div>
+        <div class="panel-body" id="scrl">
+          <ul id="messages"></ul>
+        </div>
+        <div class="panel-footer">
+          <form id="chatForm" action="">
+            <input id="myMsg" class="input-box-send" autocomplete="off" style="border-radius: 5px;" />
+            <button id="sendBtn" class="btn btn-success btn-lg">
+              <b>Gönder</b></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4></h4>
+        </div>
+        <div class="panel-body">
+
+          <div class="col-md-6 videoFrame">
+            <i class="fa fa-user" style="font-size: 24px;color: #15aabf;"></i>
+            <video id="remoteVideo" autoplay="autoplay" width="100%" height="100%">
+          </div>
+          <div class="col-md-6 videoFrame">
+            <i class="fa fa-home" style="font-size: 24px; color: #15aabf;"></i>
+            <video id="localVideo" autoplay="autoplay" width="100%" height="100%" muted></video>
+          </div>
+
+        </div>
+        <ul class="connId">
+          <li><b>Bağlantı Id'niz :&nbsp;&nbsp;</b></li>
+          <li id="displayId"></li>
+          <li><button onclick="copyToClipboard('#displayId')">Kopyala</button></li>
+        </ul>
+
+        <div class="panel-footer">
+          <br>
+          <input type="text" id="connId" class="form-control"
+            placeholder="Arkadaşınızın Bağlantı Id'sini Girin Ve Bağlan Butonuna Tıklayın" required>
+          <hr>
+          <button id="conn_button" class="btn btn-md btn-primary" type="submit"><i class="fa fa-link"></i>
+            Bağlan</button>
+          <button id="call_button" class="btn btn-md btn-success" type="submit"><i class="fa fa-video-camera"></i>
+            Ara</button>
+          <button id="end_call" class="btn btn-md btn-danger" type="submit"><i class="fa fa-stop"></i>
+            Sonlandır</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/jquery-3.5.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/moment.min.js"></script>
+  <script src="/js/peerjs.min.js"></script>
+  <script src="/js/socket.io-2.3.0.js"></script>
+
+  <script src="/js/chatClient.js"></script>
+
+  <script>
+    function copyToClipboard(element) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($(element).text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+    }
+  </script>
+
+</body>
+
+</html>
